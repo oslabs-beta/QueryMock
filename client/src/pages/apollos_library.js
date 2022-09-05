@@ -170,13 +170,24 @@ const apollos_library = {
       node.appendChild(button);
       body.appendChild(node); 
 
-      // button.onclick = closePopUpWindow(node, gql, ogCache);
+  
+
+      button.onclick = function(){
+        apollos_library.closePopUpWindow(apollos_library.gqlObject, apollos_library.cache)
+      }
+  
       return apollos_library.gqlObject
     },
 
-  //****Working on this section*****  CURRENTLY NOT WORKING
+  
+  /**closePopUpWindow Function
+   * INPUT #1: OBJECT --> This is the object that was derived from the gql query.
+   * INPUT #2: OBJECT --> This is the cache that stores all the key/value pairs from all the queries.
+   * description: 1) it gathers all the input fields from dom li and updates the cache. 2) it removes the popup window. 3) it updates the input object with the new user inputed data and returns it.
+   */
+
   closePopUpWindow: (obj, cache) => {
-    const node = document.getElementById('mockPop');
+    
     //update the cache with the new inputed values
     const newArr = document.getElementById('mockList').childNodes;  //gather all the li elements
     console.log(newArr)
@@ -188,11 +199,13 @@ const apollos_library = {
     });
 
     //close popup
+    const node = document.getElementById('mockPop');
     node.remove();
 
     //iterate over inputed object and update the value if it is different than cache
     //****THIS IS CURRENTLY NOT WORKING******
-    function iterateObj(obj, callback, cache){
+    function iterateObj(obj, cache){
+      console.log('entered iterateObj');
       for(const [key, value] of Object.entries(obj)){
         if(typeof value === 'string') {
           if(cache.hasOwnProperty(key)){
@@ -202,33 +215,13 @@ const apollos_library = {
           iterateObj(value, cache)
         }
       }
-    }
+    } 
 
-    const fakeObj = {
-      data: {
-        tracksForHome:[
-          {
-            __typename: "Track",
-            id: "id01",
-            title: "This is my fake title",
-            thumbnail: "thumbnail_01",
-            length: "length_01",
-            modulesCount: "modlesCounted_01",
-            author: {
-                __typename: "Author",
-                name: "name_01",
-                photo: "photo_01"
-            }
-        }
-        ]
-      }
-    };
 
-    //comment this out while not working and return fakeObj
-    //iterateObj(obj, compareObjectValues);
+    iterateObj(obj, cache);
       
-    console.log(obj);
-    return fakeObj;
+    console.log('end of close pop up', obj);
+    return obj; 
   }
 }
 
