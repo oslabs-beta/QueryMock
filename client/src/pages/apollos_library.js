@@ -1,41 +1,50 @@
 import { useQuery, gql } from '@apollo/client';
-
-const apollos_library = {
-  
-    
-  //OBJECT: the keys in cache are scrubbed from the user's query and the value is either our mock data or user input.
-  cache: {
-    label: 'label_01',
-    name: 'name_01',
-    id: 'id_01'
-  }, 
+import * as fs from 'fs';
 
 
-  //TESTING PURPOSES ONLY: This is what I expect to get from ZQ. 
-  gqlObject:{
-    data: {
-      tracksForHome:[
-        {
-          __typename: "Track",
-          id: "id01",
-          title: "title_01",
-          thumbnail: "thumbnail_01",
-          length: "length_01",
-          modulesCount: "modlesCounted_01",
-          author: {
-              __typename: "Author",
-              name: "name_01",
-              photo: "photo_01"
-          }
+class Apollos_Library_Class{
+  constructor(){
+
+    //OBJECT: the keys in cache are scrubbed from the user's query and the value is either our mock data or user input.
+    this.cache = {
+      label: 'label_01',
+      name: 'name_01',
+      id: 'id_01'
+    };
+
+
+    //TESTING PURPOSES ONLY
+    this.wait = false;
+
+
+    //TESTING PURPOSES ONLY: This is what I expect to get from ZQ
+    this.gqlObject ={
+      data: {
+        tracksForHome:[
+          {
+            __typename: "Track",
+            id: "id01",
+            title: "title_01",
+            thumbnail: "thumbnail_01",
+            length: "length_01",
+            modulesCount: "modlesCounted_01",
+            author: {
+                __typename: "Author",
+                name: "name_01",
+                photo: "photo_01"
+            }
+        }
+        ]
       }
-      ]
-    }
-  },
+    };
+  }
 
 
 
-  /** MockQuery Function
-   *  INPUT gql: a graphQL query written for useQuery react hook in the following format:
+
+  /**
+   * FUNCTION: mockQuery(gql, flag)
+   * @param {*} gql: a graphQL query written for useQuery react hook in the following format:
    *    gql`
    *      query Dog($breed: String!) {
    *        dog(breed: $breed) {
@@ -43,37 +52,33 @@ const apollos_library = {
    *          displayImage
    *      }
    *    `;
-   *  
-   *  INPUT #2 flag (optional): a string with the following options 
+   * @param {*} flag (optional): a string with the following options 
    *         "p" --> allows user to personalize the data
    *         "e" --> or any other entry allows user to throw an error
-   *  
-   *  OUTPUT: Object --> Specifically, it will return the object with only the key/value pairs requested,
-   *  Description: runs zqFunction() -> if flag = 'p' then runs popUpWindow() else if flag ='e' returns error object
-  */ 
-  mockQuery: (gql, flag) => {
-    //run logic for creating mock data
-    const resultObject = apollos_library.zqFunction(gql);  //returns cache2
-    
-    
-    
-
-    //if flag is 'p' then run openPopUpWindow();
-        // this.popUpWindow();
+   * @returns object:
+   * Description: runs zqFunction() -> if flag = 'p' then runs popUpWindow() else if flag ='e' returns error object
+   */
+  mockQuery(gql, flag){
+    const resultObject =  this.zqFunction(gql);  //returns cache2
+  
     if(flag) {
-      return apollos_library.openPopUpWindow(resultObject)  //
+      this.wait = true;  //TESTING PURPOSES ONLY
+      this.openPopUpWindow(resultObject)
+      // while(this.wait){} //TESTING PURPOSES ONLY
+      return this.gatherUserInput(resultObject, this.cache);
     }
 
-
-    
     //else if flag is 'e' return error object
     console.log(resultObject);
     return resultObject
-    },
+  };
+
+ 
 
 
-    /** zqFunction Function
-     * INPUT gql: a graphQL query written for useQuery react hook in the following format: 
+   /**
+    * FUNCTION zqFunction
+    * @param {gql} obj: a graphQL query written for useQuery react hook in the following format: 
      *   gql`
      *     query Dog($breed: String!) {
      *       dog(breed: $breed) {
@@ -83,111 +88,95 @@ const apollos_library = {
      *     }
      *    `;
      * 
-     * OUTPUT: object --> The object will have the keys from the query and either the values from the cache or newly created values.
-     * Description: receives gql -> scraps query for keys -> checks if cache has property of key -> either takes value from cache or creates new property on cache -> returns object with only properties requested from the gql
-    */
-    zqFunction(obj){
-      console.log('enter zqFunction');
-      return apollos_library.gqlObject;
-    },
+    * @returns object --> The object will have the keys from the query and either the values from the cache or newly created values.
+    * Description: receives gql -> scraps query for keys -> checks if cache has property of key -> either takes value from cache or creates new property on cache -> returns object with only properties requested from the gql
+    */ 
+  zqFunction(obj){
+    console.log('enter zqFunction');
+    return this.gqlObject;
+  };
 
 
-    /** OpenPopuUpWindow Function
-     * INPUT: Object --> received from zqFunction
-     * OUTPUT: Object --> the same object 
-     * Description: recieves object -> populates popup with object key/value pairs -> offers user chance to update the values -> user submits -> this.cache is updated -> returns new object
-    */
-    openPopUpWindow : (obj) =>{
-
-      //TESTING SETUP
-      // const gql = {};
-      // gql.data = {};
-      // gql.data.tracksForHome = [];
-      // const track1 = {};
-      // track1.title = 'title_01';
-      // track1.id = 'id_01';
-      // track1.thumbnail = 'thumbnail_01';
-      // track1.length = 'length_01';
-      // track1.modulesCount = 'modulesCount_01';
-      // track1.author = {};
-      // track1.author.name = 'name_01';
-      // track1.author.photo = "photo_09"
-      // gql.data.tracksForHome.push(track1);
-      // const ogCache = {};
-      //END OF TESTING SETUP
 
 
-      const body = document.getElementsByTagName('body')[0];
-      const node = document.createElement('div');
-      node.id = 'mockPop';
-      node.style.width = '100%';
-      node.style.height = '100%';
-      node.style.position = 'fixed';
-      node.style.top = '0px';
-      node.style.left = '0px';
-      node.style.backgroundColor = 'yellow';
+  /**
+   * 
+   * @param {*} obj: received from zqFunction
+   * @returns : void
+   * Description: recieves object -> populates popup with object key/value pairs -> offers user chance to update the values -> 
+   */
+  openPopUpWindow(obj){
+    console.log('entered openPopUpWindow')
+    const body = document.getElementsByTagName('body')[0];
+    const node = document.createElement('div');
+    node.id = 'mockPop';
+    node.style.width = '100%';
+    node.style.height = '100%';
+    node.style.position = 'fixed';
+    node.style.top = '0px';
+    node.style.left = '0px';
+    node.style.backgroundColor = 'yellow';
 
-      const h1 = document.createElement('h1');
-      h1.innerText = 'MockData Builder'
-      node.appendChild(h1);
+    const h1 = document.createElement('h1');
+    h1.innerText = 'MockData Builder'
+    node.appendChild(h1);
 
-      const p = document.createElement('p');
-      p.innerText = "Hi! We have prefilled the mock data fields; however, please personalize any of the data by entering the personalized mock data in the input fields  We'll save the data so the next time you run the function, it'll run the data submitted here.  If you want to change it in the future then run the function with flagging the second parameter.  Than you"
-      node.appendChild(p);
+    const p = document.createElement('p');
+    p.innerText = "Hi! We have prefilled the mock data fields; however, please personalize any of the data by entering the personalized mock data in the input fields  We'll save the data so the next time you run the function, it'll run the data submitted here.  If you want to change it in the future then run the function with flagging the second parameter.  Than you"
+    node.appendChild(p);
 
-      const ul = document.createElement('ul');
-      ul.id = 'mockList';
-      node.appendChild(ul);
+    const ul = document.createElement('ul');
+    ul.id = 'mockList';
+    node.appendChild(ul);
 
-      //grabs the object within the query search
-      let queryObject =  apollos_library.gqlObject.data[Object.keys(apollos_library.gqlObject.data)[0]][0];  //change gql
+    //grabs the object within the query search
+    let queryObject =  this.gqlObject.data[Object.keys(this.gqlObject.data)[0]][0];  //change gql
 
-      //adds an <li> to the dom
-      function addElementToDom(key, value){
-        let li = document.createElement('li');
-        li.id = `ul_${key}`
-        li.innerHTML = `${key}_li: <input id=${key} placeholder="${value}"/>`;
-        ul.appendChild(li);
-      } 
-      
-      //iterates over input object to populate popup rows.
-      function iterateObj(obj, callback){
-        for(const [key, value] of Object.entries(obj)){
-          console.log('type of', key, typeof value);
-          if(typeof value === 'string') {
-            callback(key, value)
-          } else{
-            iterateObj(value, callback)
-            }
+    //adds an <li> to the dom
+    function addElementToDom(key, value){
+      let li = document.createElement('li');
+      li.id = `ul_${key}`
+      li.innerHTML = `${key}_li: <input id=${key} placeholder="${value}"/>`;
+      ul.appendChild(li);
+    } 
+    
+    //iterates over input object to populate popup fields.
+    function iterateObj(obj, callback){
+      for(const [key, value] of Object.entries(obj)){
+        console.log('type of', key, typeof value);
+        if(typeof value === 'string') {
+          callback(key, value)
+        } else{
+          iterateObj(value, callback)
           }
         }
-      iterateObj(queryObject, addElementToDom);
-
-      //add Button
-      const button = document.createElement('button');
-      button.innerText = 'submit';
-  
-      node.appendChild(button);
-      body.appendChild(node); 
-
-  
-
-      button.onclick = function(){
-        apollos_library.closePopUpWindow(apollos_library.gqlObject, apollos_library.cache)
       }
-  
-      return apollos_library.gqlObject
-    },
+    iterateObj(queryObject, addElementToDom);
 
-  
-  /**closePopUpWindow Function
-   * INPUT #1: OBJECT --> This is the object that was derived from the gql query.
-   * INPUT #2: OBJECT --> This is the cache that stores all the key/value pairs from all the queries.
-   * description: 1) it gathers all the input fields from dom li and updates the cache. 2) it removes the popup window. 3) it updates the input object with the new user inputed data and returns it.
-   */
+    //adds a submit Button
+    const button = document.createElement('button');
+    button.innerText = 'submit';
 
-  closePopUpWindow: (obj, cache) => {
+    node.appendChild(button);
+    body.appendChild(node); 
+
+
     
+    button.onclick = function(){
+      document.getElementById('mockPop').remove();
+    }
+  };
+
+
+  /**
+   * FUNCTION gatherUserInput(obj, cache)
+   * @param {*} obj: the object recieved from zqFunction
+   * @param {*} cache: the cache located at this.cache.
+   * @returns Object: a new object is updated from the user submissions
+   * Description: this.cache is updated by user submissions -> original object is updated from this.cache and returned
+   */
+   gatherUserInput(obj, cache){
+    console.log('entered gatherUserInput');
     //update the cache with the new inputed values
     const newArr = document.getElementById('mockList').childNodes;  //gather all the li elements
     console.log(newArr)
@@ -198,12 +187,7 @@ const apollos_library = {
       if(newVal.length) cache[theID] = newVal;           
     });
 
-    //close popup
-    const node = document.getElementById('mockPop');
-    node.remove();
-
     //iterate over inputed object and update the value if it is different than cache
-    //****THIS IS CURRENTLY NOT WORKING******
     function iterateObj(obj, cache){
       console.log('entered iterateObj');
       for(const [key, value] of Object.entries(obj)){
@@ -215,17 +199,27 @@ const apollos_library = {
           iterateObj(value, cache)
         }
       }
-    } 
-
+    }
 
     iterateObj(obj, cache);
-      
-    console.log('end of close pop up', obj);
+
     return obj; 
+  };
+
+
+
+  /**
+   * description: just closes the popup window.
+   */
+  closePopUpWindow(){
+    const node = document.getElementById('mockPop');
+    node.remove();
+
+    this.wait = false; //TESTING PURPOSES 
   }
+
 }
 
+const apollos_library = new Apollos_Library_Class();
 
-
-
-  export default apollos_library;
+export default apollos_library;

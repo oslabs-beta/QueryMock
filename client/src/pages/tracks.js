@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import TrackCard from '../containers/track-card';
 import { Layout, QueryResult } from '../components';
+// import apollos_library from './apollos_library';
 import apollos_library from './apollos_library';
 
 import shareMessage from './writePages';
@@ -108,8 +109,8 @@ function gqlToCache (gql) {
 const Tracks = () => {
   console.log('tracks', TRACKS.definitions[0].selectionSet.selections[0].name.value);
   console.log(TRACKS);
-  // const { data } = apollos_library.mockQuery(TRACKS, 'p');
-  const { data } = apollos_library.mockQuery(TRACKS);
+  const { data } = apollos_library.mockQuery(TRACKS, 'p');
+  // const { data } = apollos_library.mockQuery(TRACKS);
   // const { data } = useQuery(TRACKS);
   console.log('here data', data);
   return (
