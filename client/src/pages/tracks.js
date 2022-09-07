@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 import TrackCard from '../containers/track-card';
 import { Layout, QueryResult } from '../components';
 // import apollos_library from './apollos_library';
-import apollos_library from './apollos_library';
+import apollos_library from './apollos_library2';
 
 import shareMessage from './writePages';
 
@@ -85,34 +85,16 @@ const myMock = {
 console.log('*****', TRACKS.definitions[0].selectionSet.selections[0].selectionSet.selections);
 
 // function to convert the response data from GraphQL query request into a manipulatable object
-function gqlToCache (gql) {
-  // finding the array of objects with all the Graph QL query
-  const arr = gql.definitions[0].selectionSet.selections[0].selectionSet.selections;
-  // declaring a empty object to use later
-  const cache = {};
-  function loopSelection (arr) {
-    // another function to loop thru the array and populate cache
-    for (let i = 0; i < arr.length; i++) {
-      // if one of the object has a selectionSet which means it has its own properties, then recursively invoke loopSelection  
-      if (arr[i].selectionSet) {
-          loopSelection(arr[i].selectionSet);
-        }
-      cache[arr[i].name.value] = `${arr[i].name.value}_01`;
-    }
-    return cache;
-  }
-  loopSelection(arr);
-  return cache;
-}
+
 
 
 const Tracks = () => {
+  console.log('entered Tracks')
   console.log('tracks', TRACKS.definitions[0].selectionSet.selections[0].name.value);
-  console.log(TRACKS);
-  const { data } = apollos_library.mockQuery(TRACKS, 'p');
-  // const { data } = apollos_library.mockQuery(TRACKS);
+  // const { data } = apollos_library.mockQuery(TRACKS, 5, 'p')
+  const { data } = apollos_library.mockQuery(TRACKS, 6);
   // const { data } = useQuery(TRACKS);
-  console.log('here data', data);
+  console.log('left Tracks', data);
   return (
     <Layout grid>
       <QueryResult data={data}>
@@ -123,5 +105,6 @@ const Tracks = () => {
     </Layout>
   );
 };
+
 
 export default Tracks;

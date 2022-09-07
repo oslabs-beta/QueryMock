@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
 // console.log(useQuery);
 
 console.log('******seesion storage******', sessionStorage); //testing
@@ -56,11 +56,9 @@ class Apollos_Library_Class{
    * @returns object:
    * Description: runs zqFunction() -> if flag = 'p' then runs popUpWindow() else if flag ='e' returns error object
    */
-  mockQuery(gql, num, flag){
+  mockQuery(gql, flag){
     console.log('entered mockQuery');
-    
-    const resultObject =  this.zqFunction(gql, num);  //returns cache2
-    console.log({resultObject});
+    const resultObject =  this.zqFunction(gql);  //returns cache2
   
     if(flag) {    
       console.log('skip', sessionStorage.getItem('skip')) 
@@ -113,57 +111,10 @@ class Apollos_Library_Class{
     * @returns object --> The object will have the keys from the query and either the values from the cache or newly created values.
     * Description: receives gql -> scraps query for keys -> checks if cache has property of key -> either takes value from cache or creates new property on cache -> returns object with only properties requested from the gql
     */ 
-  zqFunction2(obj){
+  zqFunction(obj){
     console.log('enter zqFunction');
     return this.gqlObject;
   };
-
-  zqFunction(input, num){
-    // finding the array of objects with all the Graph QL query
-    console.log('entered zqFunction');
-    console.log(input);
-    const arr = input.definitions[0].selectionSet.selections[0].selectionSet.selections;
-    // declaring a empty object to use later
-    const cache = {};
-    function loopSelection (arr) {
-      // another function to loop thru the array and populate cache
-      
-      for (let i = 0; i < arr.length; i++) {
-        function nestedLoop (arr, arr1, i) {
-          for (let j = 0; j < arr1.length; j++) {
-            console.log('arr1 is', arr1);
-            console.log('first element is', arr1[j].name.value);
-            let val = arr1[j].name.value;
-            cache[arr[i].name.value][val] = `${arr1[j].name.value}_01`;
-          }
-          return cache;
-        }
-        // if one of the object has a selectionSet which means it has its own properties, then recursively invoke loopSelection  
-        if (arr[i].selectionSet) {
-            console.log(arr[i].selectionSet);
-            cache[arr[i].name.value] = {};
-            console.log('in the for loop', cache);
-            return nestedLoop(arr, arr[i].selectionSet.selections, i);
-        }
-        cache[arr[i].name.value] = `${arr[i].name.value}_01`;
-      }
-      console.log({cache})
-      return cache;
-  }
-  loopSelection(arr);
-  console.log('cache', cache);
-  const key = input.definitions[0].selectionSet.selections[0].name.value;
-  let narr = [];
-  for (let i = 0; i < num; i++) {
-    narr.push(cache);
-  }
-  const ncache = { data: 
-    {
-      [key]: narr
-      }
-    }
-  return ncache;
-  }
 
 
 
