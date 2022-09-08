@@ -182,27 +182,29 @@ class Apollos_Library_Class{
 
     //Creating the dom elements and styling it.
     const body = document.getElementsByTagName('body')[0];
-    const node = document.createElement('div');
-    node.id = 'mockPop';
-    node.style.width = '100%';
-    node.style.height = '100%';
-    node.style.position = 'fixed';
-    node.style.top = '0px';
-    node.style.left = '0px';
-    node.style.backgroundColor = 'yellow';
-
+    const mockPop = document.createElement('div');
+    mockPop.id = 'mockPop';
+    mockPop.setAttribute("style", "width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-color: rgba(248, 220, 242)")
+    
     //Creating the elements within the dom.
-    const h1 = document.createElement('h1');
-    h1.innerText = 'MockData Builder'
-    node.appendChild(h1);
+    const popUp = document.createElement('div');
+    popUp.setAttribute("style", "background-color: white; width: 60%; max-width: 650px; margin: 1% auto 0 auto; border: solid; border-color: black; border-radius: 5%; border-width: thin; box-shadow: 10px 10px 25px rgb(216, 211, 211);");
+    mockPop.appendChild(popUp);
+
+    const img = document.createElement('img');
+    img.setAttribute('src', 'https://lh3.googleusercontent.com/pw/AL9nZEUkLCUpyvHYfImxG2AUJNgUq9oWBXGTAAeEfIYfrPr-PzxBIsLZHZNvm73sAgI5CvuE1asivtTsbbtNsJl3JgCKEsc7mHeqT3hyK8Okd4YC6y0zfVR1ILSs5lXLDKDcLZ2e5TIXUKzd2psWl_XPr0x5=w1522-h403-no');
+    img.setAttribute('style', "width: 100%; padding: 5% 10% 0 10%;");
+    popUp.appendChild(img);
 
     const p = document.createElement('p');
-    p.innerText = "Hi! We have prefilled the mock data fields; however, please personalize any of the data by entering the personalized mock data in the input fields  We'll save the data so the next time you run the function, it'll run the data submitted here.  If you want to change it in the future then run the function with flagging the second parameter.  Than you"
-    node.appendChild(p);
+    p.innerHTML = "Hi!  Thanks for using Apollo's Library mockQuery! <br>We have prefilled the mock data fields with text. <br>Replace any of the prefilled input boxes with your personalized mock data  <br>and then click submit. <br> <br>You can re-run the mockQuery function without the 'P' tag  <br>and your information will be retained. <br>If you have any questions, please check out our docs.  Query on!"
+    p.setAttribute('style', "padding-left: 10%; padding-right: 10%; text-align: center; font-size: 1em; color:rgb(49, 49, 49);")
+    popUp.appendChild(p);
 
     const ul = document.createElement('ul');
     ul.id = 'mockList';
-    node.appendChild(ul);
+    ul.setAttribute('style', "list-style-type: none; margin: 0; padding: 4% 10% 1% 10%; font-size: 1.25em;");
+    popUp.appendChild(ul);
 
     //grabing the object within the query search                ///WILL THIS WORK WITH ALL CODE?
     let queryObject =  obj.data[Object.keys(obj.data)[0]][0]; 
@@ -211,7 +213,20 @@ class Apollos_Library_Class{
     function addElementToDom(key, value, prepend = ''){
       let li = document.createElement('li');
       li.id = `ul_${key}`
-      li.innerHTML = `${prepend} ${key}: <input id=${key} placeholder="${value}"/>`;
+      li.setAttribute('style', 'width: 100%; display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; margin-bottom: 2%;');
+
+      const mockDiv = document.createElement('div');
+      mockDiv.id = 'mockDiv'
+      mockDiv.innerText = `${prepend} ${key}`;
+      mockDiv.setAttribute('style', "grid-column: 1 / 2; text-align: right; padding-right: 5%; color: rgb(65, 28, 65); text-shadow: 2px 2px 3px rgb(156, 156, 156);")
+      li.appendChild(mockDiv);
+
+      const mockInput = document.createElement('input');
+      mockInput.setAttribute('style', 'grid-column: 2 / 4; width: 96%; margin-left: 1%; border-radius: 5px; margin-top: -5px; line-height: 2em; border-color:rgb(65, 28, 65); box-shadow: 2px 2px 5px rgb(156, 156, 156);')
+      mockInput.id = key;
+      mockInput.setAttribute('placeholder', `${value}`);
+      li.appendChild(mockInput);
+
       ul.appendChild(li);
     } 
 
@@ -245,12 +260,20 @@ class Apollos_Library_Class{
     iterateObj(queryObject, addElementToDom);
 
     //adding a submit Button
+    const buttonDiv = document.createElement('div');
+    buttonDiv.id = "mockButtonDiv"
+    buttonDiv.setAttribute('style', "margin: 5% auto 5% auto; width: 12%;")
+    popUp.appendChild(buttonDiv);
+
     const button = document.createElement('button');
+    button.id = 'mockButton'
     button.innerText = 'submit';
+    button.setAttribute('style', "width: 100%; text-align: center; padding-top: 8%; padding-bottom: 8%; box-shadow: 2px 2px 5px rgb(156, 156, 156); border-color: rgb(65, 28, 65); border-width: thin; border-radius: 5px; background-color: rgba(248, 220, 242)")
+    buttonDiv.appendChild(button);
 
     //adding all created elments to the page
-    node.appendChild(button);
-    body.appendChild(node); 
+
+    body.appendChild(mockPop);
 
     //adding the onlick function to the button
     button.onclick = function(){
@@ -334,6 +357,5 @@ class Apollos_Library_Class{
 } //end of class
 
 const apollos_library = new Apollos_Library_Class();
-
 export default apollos_library;
 
