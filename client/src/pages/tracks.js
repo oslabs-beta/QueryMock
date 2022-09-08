@@ -3,11 +3,10 @@ import { useQuery, gql } from '@apollo/client';
 import TrackCard from '../containers/track-card';
 import { Layout, QueryResult } from '../components';
 // import apollos_library from './apollos_library';
-import apollos_library from './apollos_library2';
+import apollos_library from './apollos_library';
 
 import shareMessage from './writePages';
 
-console.log(apollos_library.cache);
 
 /** TRACKS gql query to retreive all tracks */
 const TRACKS = gql`
@@ -27,7 +26,7 @@ const TRACKS = gql`
 `;
 
 
-console.log('this is where well start');
+
 
 
 // myMocks = () =>{
@@ -91,8 +90,8 @@ console.log('*****', TRACKS.definitions[0].selectionSet.selections[0].selectionS
 const Tracks = () => {
   console.log('entered Tracks')
   console.log('tracks', TRACKS.definitions[0].selectionSet.selections[0].name.value);
-  // const { data } = apollos_library.mockQuery(TRACKS, 5, 'p')
-  const { data } = apollos_library.mockQuery(TRACKS, 6);
+  const { data } = apollos_library.mockQuery(TRACKS, 5, 'p')
+  // const { data } = apollos_library.mockQuery(TRACKS, 6);
   // const { data } = useQuery(TRACKS);
   console.log('left Tracks', data);
   return (
