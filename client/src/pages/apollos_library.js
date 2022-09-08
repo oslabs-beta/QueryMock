@@ -55,48 +55,27 @@ class Apollos_Library_Class{
     if(!num) num = 0;
 
     const newObj =  this.convertGqlToObject(gql, num);
-    console.log('OUT OF ZQ FUNCTION')
     
-    let storedCache;
-    if(sessionStorage.getItem('cache')){
-      storedCache = JSON.parse(sessionStorage.getItem('cache'));
-      this.cache = storedCache;
-    }
-    
-    const resultObj = this.updateObjWithCache(newObj, this.cache);
-    console.log({resultObj});
-
+    //if the sessionStorage has a cache then update this.cache and newObj sessionStorage cache values.
+    if(sessionStorage.getItem('cache')) this.cache = JSON.parse(sessionStorage.getItem('cache'));    
+    const resultObj = sessionStorage.getItem('cache') ? this.updateObjWithCache(newObj, this.cache) : newObj;
 
     if(!flag){
       console.log('entered no flag zone')
-      return resultObj
-    
+      
     } else if(flag === 'p' && sessionStorage.getItem('skip') === null){
       console.log('flag and skip null')
-      this.openPopUpWindow(resultObj, storedCache || this.cache);
-      return resultObj
+      this.openPopUpWindow(resultObj, this.cache);
 
     } else if(flag === 'p'){
       console.log('flag & skip')
       sessionStorage.removeItem('skip', false);
-      return resultObj;
     
     } else {
       console.log('all else');
+    }
+
     return resultObj
-    }
-
-    function updateCache(cache1, cache2){
-      for(const [key, value] of Object.entries(cache2)){
-        console.log(key, value);
-        console.log('before', cache1[key])
-        cache1[key] = value;
-        console.log('after', cache1[key])
-        console.log({cache1});
-        return cache1;
-      }
-    }
-
   }
 
   
@@ -229,10 +208,10 @@ class Apollos_Library_Class{
     let queryObject =  obj.data[Object.keys(obj.data)[0]][0]; 
 
     //adding an <li> to the dom with each key/value from the object
-    function addElementToDom(key, value){
+    function addElementToDom(key, value, prepend = ''){
       let li = document.createElement('li');
       li.id = `ul_${key}`
-      li.innerHTML = `${key}: <input id=${key} placeholder="${value}"/>`;
+      li.innerHTML = `${prepend} ${key}: <input id=${key} placeholder="${value}"/>`;
       ul.appendChild(li);
     } 
 
@@ -241,16 +220,24 @@ class Apollos_Library_Class{
       cache[key] = value;
     }
     
+    /**
+     * FUNCTION: iterateObj(obj, callback, prepend);
+     * @param {} obj -> the object with just the query fields
+     * @param {*} callback -> callback runs for each element in the field
+     * @param {*} prepend --> keeps track of what object we are in for nested objects
+     * Description: recurssively iterates over object key/values, runs callback on each pair,
+     */
     //iterating over input object to populate popup fields.
-    function iterateObj(obj, callback){
+    function iterateObj(obj, callback, prepend = ''){
       for(const [key, value] of Object.entries(obj)){
         if(typeof value === 'string' ) {  //checks if it's a nested object.
           if(key[0] !== '_' && key[1] !== '_'){
-            callback(key, value)
+            callback(key, value, prepend)
             addElementToLocalCache(key, value, cache);
           }
         } else{
-          iterateObj(value, callback)
+          const prependText = prepend + key;
+          iterateObj(value, callback, prependText)
           }
         }
       }
