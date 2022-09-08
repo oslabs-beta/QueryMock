@@ -22,7 +22,7 @@ const hasSchema = async () => {
     }
     // Locate query by searching for keyword or useQuery hook
   })
-  
+
   const placeholder = 'Copy of schema file'
   const updateSchema = (storedQueries, placeholder) => {
     // Compare query to already present schema
