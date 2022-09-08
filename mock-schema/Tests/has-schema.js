@@ -1,4 +1,7 @@
 // what to require in? 
+const cli = require('./utils/cli');
+
+// fs.appendFile() = append data to a file. If the file does not exist, it's created
 
 // Schema: 
 // Look for schema.js file 
@@ -22,3 +25,5 @@
         // Prompt: Are you sure you want to disregard these changes? (Maybe too many prompts to be determined)
         // Delete updated schema from reference
         // Prompt: Schema not saved/updated. Reference picture of current schema. 
+
+module.exports = hasSchema;

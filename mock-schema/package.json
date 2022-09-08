@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"bin": {
 		"mock-schema": "index.js",
-		"create schema": "index.js"
+		"create-schema": "index.js"
 	},
 	"author": {
 		"name": "Apollo's Library",
@@ -25,6 +25,7 @@
 	},
 	"dependencies": {
 		"apollo-graphql": "^0.9.7",
+		"boxen": "^7.0.0",
 		"chalk": "^4.1.2",
 		"chalk-animation": "^2.0.3",
 		"cli-alerts": "^1.2.2",
