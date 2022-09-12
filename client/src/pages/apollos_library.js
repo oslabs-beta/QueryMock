@@ -184,11 +184,12 @@ class Apollos_Library_Class{
     const body = document.getElementsByTagName('body')[0];
     const mockPop = document.createElement('div');
     mockPop.id = 'mockPop';
-    mockPop.setAttribute("style", "width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-color: rgba(248, 220, 242)")
+    mockPop.setAttribute("style", "width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; background-color: rgba(248, 220, 242); display: grid; grid-template-rows: 2% 1fr 2%;")
     
     //Creating the elements within the dom.
     const popUp = document.createElement('div');
-    popUp.setAttribute("style", "background-color: white; width: 60%; max-width: 650px; margin: 1% auto 0 auto; border: solid; border-color: black; border-radius: 5%; border-width: thin; box-shadow: 10px 10px 25px rgb(216, 211, 211);");
+    popUp.id = 'popUp';
+    popUp.setAttribute("style", "background-color: white; width: 60%; max-width: 650px; margin: 1% auto 0 auto; border: solid; border-color: black; border-radius: 5%; border-width: thin; box-shadow: 10px 10px 25px rgb(216, 211, 211); min-width: 600px; grid-row: 2; overflow: scroll;");
     mockPop.appendChild(popUp);
 
     const img = document.createElement('img');
@@ -217,12 +218,12 @@ class Apollos_Library_Class{
 
       const mockDiv = document.createElement('div');
       mockDiv.id = 'mockDiv'
-      mockDiv.innerText = `${prepend} ${key}`;
+      mockDiv.innerText = `${prepend} ${key}: `;
       mockDiv.setAttribute('style', "grid-column: 1 / 2; text-align: right; padding-right: 5%; color: rgb(65, 28, 65); text-shadow: 2px 2px 3px rgb(156, 156, 156);")
       li.appendChild(mockDiv);
 
       const mockInput = document.createElement('input');
-      mockInput.setAttribute('style', 'grid-column: 2 / 4; width: 96%; margin-left: 1%; border-radius: 5px; margin-top: -5px; line-height: 2em; border-color:rgb(65, 28, 65); box-shadow: 2px 2px 5px rgb(156, 156, 156);')
+      mockInput.setAttribute('style', 'grid-column: 2 / 5; width: 96%; margin-left: 1%; border-radius: 5px; margin-top: -5px; line-height: 2em; border-color:rgb(65, 28, 65); box-shadow: 2px 2px 5px rgb(156, 156, 156);')
       mockInput.id = key;
       mockInput.setAttribute('placeholder', `${value}`);
       li.appendChild(mockInput);
@@ -260,6 +261,12 @@ class Apollos_Library_Class{
     iterateObj(queryObject, addElementToDom);
 
     //adding a submit Button
+    const addHover = document.createElement('style');
+    addHover.appendChild(document.createTextNode("#mockButtonDiv:hover{box-shadow: 2px 2px 5px rgb(156, 156, 156);}"));
+    addHover.appendChild(document.createTextNode("#mockButton:hover{color: white; backgroundColor: rgb(65, 28, 65); background-color: rgb(65, 28, 65);}"));
+    document.querySelector('head').appendChild(addHover);
+
+
     const buttonDiv = document.createElement('div');
     buttonDiv.id = "mockButtonDiv"
     buttonDiv.setAttribute('style', "margin: 5% auto 5% auto; width: 12%;")
