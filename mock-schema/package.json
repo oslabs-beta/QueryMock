@@ -33,6 +33,9 @@
 		"cli-handle-unhandled": "^1.1.1",
 		"cli-meow-help": "^3.1.0",
 		"cli-welcome": "^2.2.2",
+		"commander": "^9.4.0",
+		"enquirer": "^2.3.6",
+		"inquirer": "^9.1.1",
 		"meow": "^9.0.0",
 		"nanospinner": "^1.1.0",
 		"replace-in-file": "^6.3.5"

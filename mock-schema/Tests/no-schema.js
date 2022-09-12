@@ -16,7 +16,7 @@ const noSchema = async () => {
   await fs.readFile('cli.prompt\'s data', (err, data) => {
     //Locate listed file 
     //Locate query by searching for keyword or useQuery hook // try catch 
-    if (data.word === 'query' || data.word === 'Query' || data.word === 'useQuery') {
+    if (data.word === 'gql') {
       // figure out logic to garner query information
       // NOTE: check to see if we need to iterate through multiple queries or does it stop on first instance of a query
       //If multiple queries found, display list of queries and location of each - numbered list
