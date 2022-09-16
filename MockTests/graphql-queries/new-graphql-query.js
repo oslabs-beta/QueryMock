@@ -2,8 +2,7 @@ const { gql } = require('apollo-graphql');
 
 const dndChar = gql `
   query class {
-    name:
-    classes {
+    class {
       name
       hit_die
       spellcasting {
