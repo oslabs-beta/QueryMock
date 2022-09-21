@@ -3,9 +3,9 @@
   "description": "Create a mock schema based off of desired query for Apollo GraphQL",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "bin/index.js",
+  "main": "MockSchema/index.js",
   "bin": {
-    "create-schema": "./bin/index.js"
+    "create-schema": "./MockSchema/index.js"
   },
   "author": "Apollo's Library <apollosgraphqllibrary@gmail.com> (https://github.com/oslabs-beta/apollos_library)",
   "keywords": [
