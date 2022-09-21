@@ -1,50 +1,25 @@
 {
-  "name": "apollo_library",
+  "name": "mock-schema",
+  "description": "Create a mock schema based off of desired query for Apollo GraphQL",
   "version": "1.0.0",
-  "description": "a library built for apollo jest and graphql",
-  "main": "./index.js",
+  "license": "MIT",
+  "main": "bin/index.js",
+  "bin": {
+    "create-schema": "./bin/index.js"
+  },
+  "author": "Apollo's Library <apollosgraphqllibrary@gmail.com> (https://github.com/oslabs-beta/apollos_library)",
+  "keywords": [
+    "mock-schema",
+    "Apollo's Library"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"NODE_ENV=development webpack serve\" \"node server/server.js\"",
-    "serve": "webpack serve",
-    "build": "NODE_ENV=production webpack",
-    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
-    "start": "nodemon server/server.js"
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/oslabs-beta/apollo_library.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/oslabs-beta/apollo_library/issues"
-  },
-  "homepage": "https://github.com/oslabs-beta/apollo_library#readme",
   "dependencies": {
-    "@apollo/client": "^3.6.9",
-    "apollo-server": "^3.10.2",
-    "apollo-server-core": "^3.10.2",
-    "concurrently": "^7.3.0",
-    "express": "^4.18.1",
-    "graphql": "^16.6.0",
-    "react": "^18.2.0",
-    "style-loader": "^3.3.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.18.13",
-    "@babel/preset-env": "^7.18.10",
-    "@babel/preset-react": "^7.18.6",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.5",
-    "css-loader": "^6.7.1",
-    "html-webpack-plugin": "^5.5.0",
-    "http-server": "^14.1.1",
-    "nodemon": "^2.0.19",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.10.1"
+    "apollo-graphql": "^0.9.7",
+    "boxen": "^7.0.0",
+    "chalk": "^4.1.2",
+    "readline": "^1.3.0",
+    "yargs": "^17.5.1"
   }
 }
