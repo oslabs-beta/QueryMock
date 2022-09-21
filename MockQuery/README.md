@@ -82,10 +82,10 @@ replaced code<br>
   
   - <code>'loading'</code> - This will return 'loading' so that you can test how your site will render while loading.
   
-  - <code>'p'</code> - (for personalize) A pop up window will appear with input boxes so that you can either enter the exact data you want to be displayed or you can choose a data type by placing a tilsde in front of specific words.
+  - <code>'insert'</code> - (for personalize) A pop up window will appear with input boxes so that you can either enter the exact data you want to be displayed or you can choose a data type by placing a tilsde in front of specific words.
   <br>
   <br>
-  Using the "p" flag will cause a popup window to appear where you can personalize the data.  If you don't want to come up with your own data, then look at some key words that you can use in order to populate your page with specific data:<br>
+  Using the "insert" flag will cause a popup window to appear where you can personalize the data.  If you don't want to come up with your own data, then look at some key words that you can use in order to populate your page with specific data:<br>
   <br>
       Data Type Key Words:
     - to enter an <code>int</code> type:
