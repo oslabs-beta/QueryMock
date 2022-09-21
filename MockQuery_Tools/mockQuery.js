@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import attachButtonListener from './attachButtonListener';
-import convertGqlargToObject from './convertGqlargToObject';
+import convertGqlargToObject from './convertGqlargToObject'
 import createPopUpWindow from './createPopUpWindow';
 import updateCacheFromSessionStorage from './updateCacheFromSessionStorage';
 import determineArguements from './determineArguements';
 import updateObjWithCache from './updateObjWithCache';
 
-console.log('Just another my came time')
+
 
 //INPUT -> gqlSearch : a graphQL search specifically for useQuery hook
 //The following can be in any order
@@ -21,13 +21,13 @@ function MockQuery(gqlSearch, arg2, arg3, arg4){
   let pageCache = updateCacheFromSessionStorage(newObj);
   updateObjWithCache(newObj, pageCache);
   
-  const [Nombre, setNombre] = useState(JSON.parse(JSON.stringify(newObj)));
+  const [userInput, setUserInput] = useState(JSON.parse(JSON.stringify(newObj)));
 
   
   useEffect(() => {
     if(flag === 'insert'){
     createPopUpWindow(newObj, pageCache);
-    attachButtonListener(setNombre, newObj, pageCache);
+    attachButtonListener(setUserInput, newObj, pageCache);
     }
     // if(!flag | flag !=='insert') document.getElementById('mockPop').remove();
   },[]);
@@ -40,7 +40,7 @@ function MockQuery(gqlSearch, arg2, arg3, arg4){
     return {loading: true};
   }
 
-  return Nombre
+  return userInput
 }
 
 export default MockQuery
