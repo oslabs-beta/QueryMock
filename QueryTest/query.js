@@ -15,3 +15,4 @@ query class {
 `
 
 module.exports = dndChar;
+

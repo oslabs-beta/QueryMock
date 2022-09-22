@@ -87,12 +87,12 @@ function strToArgs(str) {
       dig++;
     }
     if (str[i] === '}') {
-      console.log(dig)
+      // console.log(dig)
       cache[dig] = str.indexOf('}');
     }
   }
-  console.log(cache);
-  console.log(str[104])
+  // console.log(cache);
+  // console.log(str[104])
   let count = 0;
   for (let i = 0; i < str.length; i++) {
     let typearr = [];
@@ -107,13 +107,13 @@ function strToArgs(str) {
         };
         if (stg.length === count * 2 && str[i-1] === ' ') {
           init = i;
-          console.log(init);
+          // console.log(init);
         }
         if (str[i] === ' ' && str[i-1] !== ' ') {
-          console.log(init)
-          console.log(i);
+          // console.log(init)
+          // console.log(i);
           prop = str.slice(init, i-1);
-          console.log(prop);
+          // console.log(prop);
           typearr.push(prop);
           spc = [];
           spc.push(str[i]);
@@ -135,26 +135,26 @@ function strToArgs(str) {
           };
           if (spc.length === count * 2 && str[j-1] === ' ') {
             beg = j;
-            console.log(beg)
+            // console.log(beg)
           }
           if (str[j] === ' ' && str[j+1] === '{') {
             prop = str.slice(beg, j);
             typearr.push(prop);
             spc =[];
             spc.push(str[j])
-            console.log(prop);
+            // console.log(prop);
           }
           if (str[j] === ' ' && str[j+1] !== '{') {
-            console.log(beg)
-            console.log(j);
+            // console.log(beg)
+            // console.log(j);
             prop = str.slice(beg, j-1);
-            console.log(prop);
+            // console.log(prop);
             typearr.push(prop);
             spc = [];
             spc.push(str[j]);
           }
         }
-        console.log(typearr)
+        // console.log(typearr)
         result.push(typearr);
       }
       arr.push(str[i]);
@@ -173,13 +173,13 @@ function createType(arr, arr1) {
       if (j === arr1[i].length - 1) {
         add = `${arr1[i][j]}: String!
 `;
-        console.log(add);
+        // console.log(add);
         gql = gql.concat(add);
         continue;
       }
       add = `${arr1[i][j]}: String!
   `
-      console.log(add);
+      // console.log(add);
       gql = gql.concat(add);
     }
     gql = gql.concat(`}`);
