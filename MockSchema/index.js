@@ -12,9 +12,8 @@ const readline = require('readline');
 // require boxen, chalk for styling purposes
 const boxen = require('boxen');
 const chalk = require('chalk');
-// require fs in order to createReadStream to find file where query is
+// require fs in order to createReadStream, appendFile, and readFileSync to find file where query is
 const { createReadStream, appendFile, readFileSync }  = require('fs');
-// const fs = require('fs');
 
 // createInterface for readline to accept prompts from keyboard
 const rl = readline.createInterface({
@@ -26,10 +25,9 @@ const rl = readline.createInterface({
 const boxenOptions = {
   padding: 5,
   margin: 5,
-  borderStyle: "double",
-  borderColor: "magenta",
-//   backgroundColor: "#555555"
-  backgroundColor: "magenta",
+  borderStyle: 'double',
+  borderColor: 'magenta',
+  backgroundColor: 'magenta',
 };
 
 function strToSchema(str) {
@@ -189,24 +187,6 @@ function createType(arr, arr1) {
   }
   return result;
 }
-const str = `
-query class {
-  class {
-    name
-    hit_die
-    spellcasting {
-      spellcasting_ability {
-        name
-      }
-    }
-  }
-}
-`
-
-// console.log('tight string', str);
-// console.log('schema', strToSchema(str));
-// console.log('args', strToArgs(str));
-// console.log('final schema', createType(strToSchema(str), strToArgs(str)));
 
 const findAndShowQuery = () => {
   // regex to find queries from given file
@@ -215,34 +195,24 @@ const findAndShowQuery = () => {
   let newSchema; 
   // prompt user to enter path where query(s) are stored 
   rl.question('Where is your query stored ? ', function(data){
-    // potentially get rid of this console log 
-//     console.log(`Here is your path : ${data}`);
     // initialize constant with value taken from createReadStream 
     const queryData = createReadStream(data);
-//     console.log('do we get here? ', queryData);
     // once the data is collected from the createReadStream parse the information
     queryData.on('data', chunk => {
       let body = [];
-      // console.log('Do we get here? ', chunk);
       body.push(chunk);
       // buffer the information into a readable string instead of bytes
       let buffer = Buffer.concat(body).toString();
-      // console.log('Is this a string? ', typeof buffer);
       // parse the query from the string with the regular expression
       foundQuery = buffer.match(regex);
-      // console.log('please tell me you are a string :', foundQuery) // it is not, 'tis an array 
       foundQuery.forEach((el) => {
-      //   console.log('what are we passing in? :', el);
-      //   let perQuery = el.replace(noBackticksRegex, '')
-      //   let perQuery = el.trim();
-      //   console.log('is this trimmed', perQuery);
+        // invoke strToSchema to parse type
         const schemaType = strToSchema(el);
-      //   console.log('what is our schema type? :', schemaType);
+        // invoke strToArgs to parse properties
         const schemaProperty = strToArgs(el);
-      //   console.log('what is our schema property? :', schemaProperty);
+        // invoke createType to get individual parts of the schemas
         const finalSchema = createType(schemaType, schemaProperty);
-      //   console.log('what is the finalSchema', finalSchema);
-        // iterate thru finalSchema to produce a bigass string
+        // iterate thru finalSchema to produce one cohesive string
         function finalSchemaStr (arr) {
           let bigstr = '';
           for (let i = 0; i < finalSchema.length; i++) {
@@ -250,57 +220,27 @@ const findAndShowQuery = () => {
           }
           return bigstr;
         }
-        
+        // prompt user for the path where they want their schema stored
         rl.question('Please declare the path where you would like your schema stored : ', function(storedSchema){
           newSchema = storedSchema;
           const schemaStr = finalSchemaStr(finalSchema);
+          // create or append to file received from user input
           appendFile(newSchema, schemaStr, (err) => {
             if (err) {
               console.log(err);
             } else {
               console.log('file appended');
             }
+            // close readline instance
             rl.close();
           })
         })
-      //   finalSchema.forEach((element) => {
-      //     rl.question('Please declare the path where you would like your schema stored : ', function(storedSchema) {
-      //       newSchema = storedSchema;
-      //       appendFile(newSchema, element, (err) => {
-      //         if(err) {
-      //           console.log(err);
-      //         } else {
-      //           console.log('file appended');
-      //         }
-      //       });
-      //     })
-      //   rl.question('Please declare the path where you would like your schema stored : ', function(storedSchema) {
-      //     newSchema = appendFile(storedSchema, finalSchema, function() {
-      //       rl.close();
-      //       });
-      //     rl.close();
-      //   })
-      //   rl.close();
       })
-      // const schemaType = strToSchema(foundQuery);
-      // const schemaProperty = strToArgs(foundQuery);
-      // const finalSchema = createType(schemaType, schemaProperty);
-      // console.log('what is the finalSchema', finalSchema);
-      // rl.question('Please declare the path where you would like your schema stored : ', function(storedSchema) {
-      //   newSchema = appendFile(storedSchema, finalSchema, function() {
-      //     rl.close();
-      //   });
-      // //   rl.close();
-      // })
-      // rl.close();
     })
-  //     rl.close();
   })
-//   console.log(data);
-  // on close confirm the data/query with in the console
+  // on close confirm the final mock schema with in the console
   rl.on('close', function() {
     const answer = boxen(chalk.italic.bold(`This is your schema file, \n ${readFileSync(newSchema)}`), boxenOptions);
-//     const answer = boxen(chalk.italic.bold(`This is your query, ${foundQuery}`), boxenOptions);
     console.log(answer);
     process.exit(0);
   })
