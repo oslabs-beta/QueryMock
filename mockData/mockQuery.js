@@ -26,10 +26,10 @@ function MockQuery(gqlSearch, arg2, arg3, arg4){
   
   useEffect(() => {
     if(flag === 'insert'){
+    setUserInput({loading: true});
     createPopUpWindow(newObj, pageCache);
     attachButtonListener(setUserInput, newObj, pageCache);
     }
-    // if(!flag | flag !=='insert') document.getElementById('mockPop').remove();
   },[]);
 
   
