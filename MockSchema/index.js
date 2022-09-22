@@ -5,6 +5,7 @@
  * Create mock schema based off of desired query for Apollo GraphQL
  *
  * @author Apollo's Library <https://github.com/oslabs-beta/apollos_library>
+ * Thank you for using our mock schema
  */
 
 // require readline to connect with the terminal
