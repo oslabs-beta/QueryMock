@@ -1,5 +1,5 @@
 //INPUT -> obj: Object
-//OUTPUT: null
+//OUTPUT: string
 //description: Grabs the name of the query from the object that was converted from gql.
 function findQueryName(obj){
   //grabing the object within the query search. checks if it is in an array.
@@ -8,4 +8,5 @@ function findQueryName(obj){
 }
 
 
-export default findQueryName;
+// export default findQueryName;
+module.exports = findQueryName; //for testing purposes

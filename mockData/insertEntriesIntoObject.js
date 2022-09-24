@@ -15,8 +15,10 @@ function insertEntriesIntoObject(obj, cache){
       }
     }
   }
-
   return obj;
 }
 
-export default insertEntriesIntoObject;
+
+
+// export default insertEntriesIntoObject;
+module.exports = insertEntriesIntoObject;  //For Testing Purposes

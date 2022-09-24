@@ -1,4 +1,5 @@
-import findQueryName from "./findQueryName";
+// import findQueryName from "./findQueryName";  
+const findQueryName = require('../mockData/findQueryName');  //for testing purposes
 
 //INPUT: Object
 //OUTPUT: Object
@@ -10,4 +11,5 @@ function findQueryObject(obj){
   return queryObject;
 }
 
-export default findQueryObject;
+// export default findQueryObject;
+module.exports = findQueryObject;

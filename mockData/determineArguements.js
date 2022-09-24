@@ -20,4 +20,5 @@ function determineArguements(arg2, arg3, arg4){
   return result;
 }
 
-export default determineArguements
+// export default determineArguements
+module.exports = determineArguements; //for testing
