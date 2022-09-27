@@ -22,7 +22,7 @@ import findQueryObject from './findQueryObject';
 
   //add image for popup
   const img = document.createElement('img');
-  img.setAttribute('src', 'https://lh3.googleusercontent.com/pw/AL9nZEUkLCUpyvHYfImxG2AUJNgUq9oWBXGTAAeEfIYfrPr-PzxBIsLZHZNvm73sAgI5CvuE1asivtTsbbtNsJl3JgCKEsc7mHeqT3hyK8Okd4YC6y0zfVR1ILSs5lXLDKDcLZ2e5TIXUKzd2psWl_XPr0x5=w1522-h403-no');
+  img.setAttribute('src', 'https://lh3.googleusercontent.com/pw/AL9nZEUQDLLDUjHxpJBZ9HWnZ9X_oMCCj59rMUgvSwFmGOkwAfpBw0TZOIKUfA9_E7Q8j82aXA4e0ncrP8SNgtg6CMQY96eGOey6VhF8DxCH5yFajSKL99wmIVZ6FgOwei2C9YYIWE2OUp9yw5sA4QVPkHIn=w1840-h674-no?authuser=0');
   img.setAttribute('style', "width: 100%; max-width: 550px padding: 5% 10% 0 10%;");
   popUp.appendChild(img);
 

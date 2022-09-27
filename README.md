@@ -1,5 +1,6 @@
-![Alt text](https://lh3.googleusercontent.com/pw/AL9nZEUkLCUpyvHYfImxG2AUJNgUq9oWBXGTAAeEfIYfrPr-PzxBIsLZHZNvm73sAgI5CvuE1asivtTsbbtNsJl3JgCKEsc7mHeqT3hyK8Okd4YC6y0zfVR1ILSs5lXLDKDcLZ2e5TIXUKzd2psWl_XPr0x5=w1522-h403-no "Apollo's Library")
-<p>Apollo's Library is built for developers who are using Apollo, GraphQL, and React.</p>
+![Alt text](https://lh3.googleusercontent.com/pw/AL9nZEUQDLLDUjHxpJBZ9HWnZ9X_oMCCj59rMUgvSwFmGOkwAfpBw0TZOIKUfA9_E7Q8j82aXA4e0ncrP8SNgtg6CMQY96eGOey6VhF8DxCH5yFajSKL99wmIVZ6FgOwei2C9YYIWE2OUp9yw5sA4QVPkHIn=w1840-h674-no?authuser=0 "QUERY MOCK")
+
+<p>The Query Mock library is built for developers who are using Apollo, GraphQL, and React.</p>
 <p>We currently have two books in our library:</p>
     1)  mockQuery -> Which is a function that provides mock data for front end developers when the backend is not set up.
     <br>
@@ -30,7 +31,7 @@ $ <code> npm install -g</code>
 WARNING: Do not add the global flag during the inital npm install, this will cause an error when attempting to use create-schema.</p>
 <br>
 <br>
-<h1><b>USING APOLLO'S LIBRARY</b></h1>
+<h1><b>USING QUERY MOCK</b></h1>
 ​
 <h2><b>TOOL #1:</b> The mockQuery() Method</h2>
 <h3><b>DESCRIPTION:</b></h3> <p>mockQuery is a temporary useQuery replacement, that provides mock data for front end development especially when the backend and/or schema have not been created.  The mockQuery method will provide you data so that you can visualize your front end code.
@@ -38,9 +39,9 @@ WARNING: Do not add the global flag during the inital npm install, this will cau
 The idea is that while the backend is under construction, you would replace useQuery with mockQuery(), so that when your database is set up, you can swap them back and already know how everything will render on the page.</p>
 ​
 <h3><b>Importing The Method</b></h3>
-In every page that you are running a GraphQL search and using the useQuery method, import Apollo's Library at the top of the page</p>
+In every page that you are running a GraphQL search and using the useQuery method, import Query Mock at the top of the page</p>
 ​
-<code>import al from '[your file path]/Apollos_Library'</code>
+<code>import al from '[your file path]/Query_Mock</code>
 <br>​
 <h3><b>Implementing the Method</b></h3>
 <p>Wherever you are using the useQuery method, replace it like we do in the following code:
@@ -232,7 +233,7 @@ addresses the issue of query handling in the Gateway with Apollo Federation. Thi
 <br>
 <br>
 <h2><b>Meet The Team</b></h2>
-Apollo’s Library is currently a team of four software engineers, excited about the possibilities of Apollo GraphQL. Here is our team:
+Query Mock is currently a team of four software engineers, excited about the possibilities of Apollo GraphQL. Here is our team:
 <br>
 <br>
 Jacob Jurado:
@@ -273,6 +274,7 @@ We appreciate you taking the time to read our article. If you find this product 
 Special thanks to Katherine Kim for mentoring and giving us guidance. 
 <br>
 <br>
-We would also like to thank Natalie Klein, Mike Masatsugu and Alexander Holden for supporting us in our creation of Apollo’s Library. 
+We would also like to thank Natalie Klein, Mike Masatsugu and Alexander Holden for supporting us in our creation of Query Mock. 
 
 
+<img src="https://lh3.googleusercontent.com/gq_nuqL2_9fIQvPnuc6EN8q4c6nllSRLJxmp9FGbLGDNIcnSYOSwg71VQPGPhQ-2P4O0ZrbBkM8gUTRQM7xaoWwsA0NE2aJvK4MRvCaWwV-GHaZgKk3wlAQo3-XyVsMTeHWEHOLvz3DgaWZIZ10iFzkLRg8MYJd4k6k8FGoI3ASYXrmTInVN843CUBWANVoMMfJQUyu2pwV6lhOjW1kPFzoxWoWRop0qsLUvXc9eA5aC17elhX784Ymsejzd5SQVd62e_MHvSsY_QbepDk9NqdDNPk9VO4WYSJMqFBf_qR9kZ2trNpMv9BCeIsu99Dt5jmT1NXjk4s0mfORNZAtEbC0VbEVA0DAdK4rK2OFoRqE8ZH1Px5eX5_eScUAxlAWoR8sT-dnOswGjZ_vZayrp839_wzxLUEm7lkKt0JnelMdEDds7fCyzyVd2WZ011v0VgwCpBHvgevy799pFcr5K0TLGkJExY0u0fshArMd4CDp3LP-lC6PEu0P8g87y7D70eeaj11RtctVPZLl0czwJHkmk2zHFoRcOUCDFxAPbQFMRDykU13k1KGlCIVh4qwVA3ZaC6IUHZBdTPnX7I4S02vZA4dRw9u0jSaN57dmcF3SKL_73rY9v6bXq9vVvQ3_XbcXb1rAh6mTOauPB8r7BAszgZy39QA6_DD-ast72BkHRDkCdOh3wPc4zv9o2uTMtOqcaHadIlMrKa7TW8lTKzl3pzsQCH1JxC_5Z5M_4BochTUURNtZ9I9BVKn4h2A=w1840-h1080-no?authuser=0" alt="drawing of Puery the Cat" style="width:200px; border-bottom: solid; margin-left:"/>
