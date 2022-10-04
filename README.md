@@ -1,5 +1,7 @@
-![Alt text](https://lh3.googleusercontent.com/pw/AL9nZEUkLCUpyvHYfImxG2AUJNgUq9oWBXGTAAeEfIYfrPr-PzxBIsLZHZNvm73sAgI5CvuE1asivtTsbbtNsJl3JgCKEsc7mHeqT3hyK8Okd4YC6y0zfVR1ILSs5lXLDKDcLZ2e5TIXUKzd2psWl_XPr0x5=w1522-h403-no "Apollo's Library")
-<p>Apollo's Library is built for developers who are using Apollo, GraphQL, and React.</p>
+
+<img src="./README_assets/querymockimage.jpeg" alt="Logo for QueryMock" style="width:100%"/>
+
+<p>The QueryMock library is built for developers who are using Apollo, GraphQL, and React.</p>
 <p>We currently have two books in our library:</p>
     1)  mockQuery -> Which is a function that provides mock data for front end developers when the backend is not set up.
     <br>
@@ -30,7 +32,7 @@ $ <code> npm install -g</code>
 WARNING: Do not add the global flag during the inital npm install, this will cause an error when attempting to use create-schema.</p>
 <br>
 <br>
-<h1><b>USING APOLLO'S LIBRARY</b></h1>
+<h1><b>USING QueryMock</b></h1>
 ​
 <h2><b>TOOL #1:</b> The mockQuery() Method</h2>
 <h3><b>DESCRIPTION:</b></h3> <p>mockQuery is a temporary useQuery replacement, that provides mock data for front end development especially when the backend and/or schema have not been created.  The mockQuery method will provide you data so that you can visualize your front end code.
@@ -38,9 +40,9 @@ WARNING: Do not add the global flag during the inital npm install, this will cau
 The idea is that while the backend is under construction, you would replace useQuery with mockQuery(), so that when your database is set up, you can swap them back and already know how everything will render on the page.</p>
 ​
 <h3><b>Importing The Method</b></h3>
-In every page that you are running a GraphQL search and using the useQuery method, import Apollo's Library at the top of the page</p>
+In every page that you are running a GraphQL search and using the useQuery method, import QueryMock at the top of the page</p>
 ​
-<code>import al from '[your file path]/Apollos_Library'</code>
+<code>import al from '[your file path]/Query_Mock</code>
 <br>​
 <h3><b>Implementing the Method</b></h3>
 <p>Wherever you are using the useQuery method, replace it like we do in the following code:
@@ -104,6 +106,7 @@ replaced code:<br>
   <br>
   Using the <i>"insert"</i> flag will cause a popup window to appear where you can personalize the data.  If you don't want to come up with your own data, then we supply some key words that you can use in order to populate your page with specific data:<br>
   <br>
+  <img src="./README_assets/popup_filled.png" alt="drawing of Puery the Cat" style="width:100%"/>
       Data Type Key Words:
     - to enter an <code>int</code> type:
       - <code>~int</code>
@@ -232,7 +235,7 @@ addresses the issue of query handling in the Gateway with Apollo Federation. Thi
 <br>
 <br>
 <h2><b>Meet The Team</b></h2>
-Apollo’s Library is currently a team of four software engineers, excited about the possibilities of Apollo GraphQL. Here is our team:
+QueryMock is currently a team of four software engineers, excited about the possibilities of Apollo GraphQL. Here is our team:
 <br>
 <br>
 Jacob Jurado:
@@ -273,6 +276,7 @@ We appreciate you taking the time to read our article. If you find this product 
 Special thanks to Katherine Kim for mentoring and giving us guidance. 
 <br>
 <br>
-We would also like to thank Natalie Klein, Mike Masatsugu and Alexander Holden for supporting us in our creation of Apollo’s Library. 
+We would also like to thank Natalie Klein, Mike Masatsugu and Alexander Holden for supporting us in our creation of Query Mock. 
 
 
+<img src="./README_assets/halfcat.jpeg" alt="drawing of Puery the Cat" style="width:200px; border-bottom: solid; margin-left:"/>
