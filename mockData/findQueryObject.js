@@ -11,5 +11,5 @@ function findQueryObject(obj){
   return queryObject;
 }
 
-// export default findQueryObject;
-module.exports = findQueryObject;
+export default findQueryObject;
+// module.exports = findQueryObject;  //for testing

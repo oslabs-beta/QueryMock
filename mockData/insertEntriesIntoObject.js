@@ -20,5 +20,5 @@ function insertEntriesIntoObject(obj, cache){
 
 
 
-// export default insertEntriesIntoObject;
-module.exports = insertEntriesIntoObject;  //For Testing Purposes
+export default insertEntriesIntoObject;
+// module.exports = insertEntriesIntoObject;  //For Testing Purposes

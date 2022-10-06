@@ -8,5 +8,5 @@ function findQueryName(obj){
 }
 
 
-// export default findQueryName;
-module.exports = findQueryName; //for testing purposes
+export default findQueryName;
+// module.exports = findQueryName; //for testing purposes
